@@ -39,7 +39,7 @@ var engine = coreAudio.createNewAudioEngine()
  * A processing function that can process / manipulate the incoming audio samples
  * before returning them to the soundcard's output.
  * @param {Array} samples The samples from the input stream.
- * @return {Array} samples The samples for the output stream.
+ * @return {Array} The samples for the output stream.
  */
 function processAudio( inputBuffer ) {	
 	for (var channel = 0; channel < inputBuffer.length; ++channel) {
@@ -125,7 +125,10 @@ engine.addAudioCallback(processAudio)
 General functionality
 
 ```javascript
-/** @type {boolean} Returns whether the audio engine is active. */
+/**
+ * Returns whether the audio engine is active.
+ * @return {boolean} Whether the audio engine is active.
+ */
 var active = engine.isActive()
 
 /**
@@ -146,6 +149,7 @@ var opts = engine.getOptions()
 /**
  * Returns the current input buffer of the soundcard as array.
  * Note: This is a blocking call, don't take too long!
+ * @return {Array} The current input buffer of the soundcard as array.
  */
 var samples = engine.read()
 
