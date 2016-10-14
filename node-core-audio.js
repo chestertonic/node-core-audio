@@ -47,7 +47,6 @@ function AudioEngine( options ) {
 	this.audioStreamer;
 	
 	this.processingCallbacks = [];
-	this.uiUpdateCallbacks = [];
 	
 	this.outputBuffer = [];
 	this.tempBuffer = [];
@@ -109,11 +108,6 @@ function AudioEngine( options ) {
 
 			if( validateOutputBufferStructure(outputBuffer) )
 				_this.audioEngine.write( outputBuffer );
-			
-			// Call our UI updates now that all the DSP work has been done
-			for( var iUpdate=0; iUpdate < _this.uiUpdateCallbacks.length; ++iUpdate ) {
-				_this.uiUpdateCallbacks[iUpdate]();
-			}
 		}
 	}, 1 );
 } // end AudioEngine()
@@ -156,6 +150,15 @@ AudioEngine.prototype.getProcessAudio = function() {
 } // end AudioEngine.getProcessAudio()
 
 
+/**
+ * Sets the fft callback function.
+ *
+ * @param {Function} callback The callback function.
+ */
+AudioEngine.prototype.setFFTCallback = function(callback) {
+	this.audioEngine.setFFTCallback(callback)
+}
+
 //////////////////////////////////////////////////////////////////////////
 // Get the engine's options 
 AudioEngine.prototype.getOptions = function() {
@@ -177,14 +180,6 @@ AudioEngine.prototype.setOptions = function( options ) {
 AudioEngine.prototype.addAudioCallback = function( callback ) {
 	this.processingCallbacks.push( callback );
 } // end AudioEngine.addAudioCallback()
-
-
-//////////////////////////////////////////////////////////////////////////
-// Add a UI update callback
-AudioEngine.prototype.addUpdateCallback = function( callback ) {
-	this.uiUpdateCallbacks.push( callback );
-} // end AudioEngine.addUpdateCallback()
-
 
 //////////////////////////////////////////////////////////////////////////
 // Returns whether the audio engine is active 
