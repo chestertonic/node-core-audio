@@ -2,9 +2,12 @@
  * @author Martin Mende https://github.com/mmende
  * @license MIT
  */
-
-#include <cmath>
-
+#if defined(_WIN32) || defined(_WIN64)
+    #define _USE_MATH_DEFINES
+    #include <math.h>
+#else
+    #include <cmath>
+#endif
 /**
  * The possible window function types.
  */

@@ -1,5 +1,5 @@
 {
-	'targets': [
+  'targets': [
 		{
 			'target_name': 'NodeCoreAudio',
 			'sources': [
@@ -8,7 +8,7 @@
 				'NodeCoreAudio/WindowFunction.cpp',
 			],
 			'include_dirs': [
-                '<!(node -e "require(\'nan\')")',
+        '<!(node -e "require(\'nan\')")',
 				'<(module_root_dir)/NodeCoreAudio/'
 			],
 			'conditions' : [
@@ -50,8 +50,10 @@
 						"conditions": [
 							[
 								'target_arch=="ia32"', {
+                  'include_dirs': ["D:\\lib\\fftw\\x32"],
 									'libraries' : [
-										'<(module_root_dir)/gyp/lib/win32/portaudio_x86.lib'
+										'<(module_root_dir)/gyp/lib/win32/portaudio_x86.lib',
+                    '<(module_root_dir)/gyp/lib/win32/libfftw3-3.lib'
 									],
 									'copies': [
 										{
@@ -59,15 +61,19 @@
 										    'files': [
 										 		'<(module_root_dir)/gyp/lib/win32/portaudio_x86.dll',
 										 		'<(module_root_dir)/gyp/lib/win32/portaudio_x86.lib',
-										    ]
+												'<(module_root_dir)/gyp/lib/win32/libfftw3-3.dll',
+                        '<(module_root_dir)/gyp/lib/win32/libfftw3-3.lib'
+										  ]
 										}
 									]
 								}
 							],
 							[
 								'target_arch=="x64"', {
+                  'include_dirs': ["D:\\lib\\fftw\\x64"],
 									'libraries' : [
-										'<(module_root_dir)/gyp/lib/win64/portaudio_x64.lib'
+										'<(module_root_dir)/gyp/lib/win64/portaudio_x64.lib',
+                    '<(module_root_dir)/gyp/lib/win64/libfftw3-3.lib'
 									],
 									'copies': [
 										{
@@ -75,14 +81,18 @@
 										    'files': [
 										 		'<(module_root_dir)/gyp/lib/win64/portaudio_x64.dll',
 										 		'<(module_root_dir)/gyp/lib/win64/portaudio_x64.lib',
-										    ]
+												'<(module_root_dir)/gyp/lib/win64/libfftw3-3.dll',
+                        '<(module_root_dir)/gyp/lib/win64/libfftw3-3.lib'
+										  ]
 										}
 									]
 								}
 							]
 						],
 
-						'include_dirs' : [ "gyp/include" ]
+						'include_dirs' : [ "gyp/include",
+                               "D:\\lib\\portaudio\\include"
+             ]
 					}
 				]
 			]
